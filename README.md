@@ -5,75 +5,86 @@ To implement Erosion and Dilation using Python and OpenCV.
 1. Anaconda - Python 3.7
 2. OpenCV
 ## Algorithm:
-### Step1:
-<br>
+## Step1:
+Apply the dilation operation on the image using cv2.dilate() with the same structuring element. Dilation will increase the size of the white regions (text) in the image, effectively reversing the effect of erosion
 
+## Step2:
+Initialize a blank image (100 pixels high and 400 pixels wide) using NumPy. The image should be a single-channel (grayscale) array filled with zeros (black).
 
-### Step2:
-<br>
+## Step3:
+Use OpenCV's cv2.putText() function to overlay the text "HYCINTH" on the blank image. Define the font style, position, font scale, color, and thickness for rendering the text.
 
-### Step3:
-<br>
+## Step4:
+Specify the size of the structuring element (e.g., 5x5 pixels) and create a rectangular structuring element using cv2.getStructuringElement(). This element will be used for the morphological operations.
 
-### Step4:
-<br>
-
-### Step5:
-<br>
-
+## Step5:
+Apply the erosion operation on the image using cv2.erode() with the defined structuring element. Erosion will reduce the size of the white regions (text) in the image.
  
 ## Program:
-
-``` Python
+```
+Developed by:VEDHASHREE.G
+Register No:212223240171
+```
 # Import the necessary packages
+ ```
+import cv2
+import matplotlib.pyplot as plt
 
-
-
+# Create a blank image (100 pixels high and 400 pixels wide)
+img = np.zeros((100, 400), dtype='uint8')
+```
 # Create the Text using cv2.putText
-
-
-
+```
+# Put some text on the image for demonstration
+cv2.putText(img, 'KOUSALYA', (60, 70), cv2.FONT_HERSHEY_SIMPLEX, 2, (255), 5)
+```
 # Create the structuring element
+```
+# Create a rectangular structuring element
+kernel_size = (5, 5)  # Width and height of the kernel
+structuring_element = cv2.getStructuringElement(cv2.MORPH_RECT, kernel_size)
 
+# Perform Erosion
+eroded_image = cv2.erode(img, structuring_element, iterations=1)
 
+# Perform Dilation
+dilated_image = cv2.dilate(img, structuring_element, iterations=1)
+
+# Display the original, eroded, and dilated images
+plt.figure(figsize=(15, 5))
+```
+# Original Image:
+```
+# Original Image
+
+plt.imshow(img, cmap='gray')
+plt.title('Original Image')
+plt.axis('off')
+
+plt.show()
+```
+![WhatsApp Image 2024-11-16 at 20 55 41_a9710124](https://github.com/user-attachments/assets/f6e1f89d-6706-4314-a006-ab9d8a464a7f)
 
 # Erode the image
-
-
-
+```
+plt.figure(figsize=(15, 5))
+# Eroded Image
+plt.imshow(eroded_image, cmap='gray')
+plt.title('Eroded Image')
+plt.axis('off')
+```
+![WhatsApp Image 2024-11-16 at 20 55 59_e0517e9d](https://github.com/user-attachments/assets/dbbe5c05-9124-452a-b25b-5cdc91502b16)
 
 # Dilate the image
-
-
-
-
-
 ```
-## Output:
+plt.figure(figsize=(15, 5))
+# Dilated Image
+plt.imshow(dilated_image, cmap='gray')
+plt.title('Dilated Image')
+plt.axis('off')
+```
+![WhatsApp Image 2024-11-16 at 20 57 00_717cca3a](https://github.com/user-attachments/assets/ae42a8aa-b000-4abd-94ed-1c8870304aec)
 
-### Display the input Image
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-### Display the Eroded Image
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-### Display the Dilated Image
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 ## Result
 Thus the generated text image is eroded and dilated using python and OpenCV.
